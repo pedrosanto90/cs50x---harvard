@@ -1,6 +1,6 @@
-#include <ctype.h>
 #include <cs50.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 
 // Points assigned to each letter of the alphabet
@@ -11,34 +11,50 @@ int compute_score(string word);
 int main(void)
 {
     // Get input words from both players
-    string word1 = get_string("Player 1: ");
-    string word2 = get_string("Player 2: ");
+    string word[2];
+
+    word[0] = get_string("Player 1: ");
+    word[1] = get_string("Player 2: ");
 
     // Score both words
-    int score1 = compute_score(word1);
-    int score2 = compute_score(word2);
+    int score1 = compute_score(word[0]);
+    int score2 = compute_score(word[1]);
 
     // TODO: Print the winner
-    // Check who have more points
+    // Check who has more points
     if (score1 > score2)
     {
-        printf("Player 1 wins with %i points for word \"%s\"\n", score1, word1);
-        return 0;
+        printf("Player 1 wins!\n");
     }
-    else if (score2 > score1)
+
+    if (score1 < score2)
     {
-        printf("Player 2 wins with %i points for word \"%s\"\n", score2, word2);
-        return 0;
+        printf("Player 2 wins!\n");
     }
-    // If both players have tha same points, its a tie and the program stops
-    else
+
+    else if (score1 == score2)
     {
-        printf("Its a tie\n");
-        return 0;
+        printf("Tie!\n");
     }
 }
 
 int compute_score(string word)
 {
-    // TODO: Compute and return score for string
+    // TODO: Compute and return score for string, ingore none letter chars
+    int score = 0;
+
+    for (int i = 0; i < strlen(word); i++)
+    {
+        if (isupper(word[i]))
+        {
+            score += POINTS[word[i] - 'A'];
+        }
+
+        else if (islower(word[i]))
+        {
+            score += POINTS[word[i] - 'a'];
+        }
+
+    }
+    return score;
 }
