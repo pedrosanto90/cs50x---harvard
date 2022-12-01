@@ -1,0 +1,7 @@
+input 1
+a = b
+b = c
+...
+
+procurar a letra dentro de um array com o alfabeto e somar o input e retornar a letra correspondente a letra original mais o input
+
